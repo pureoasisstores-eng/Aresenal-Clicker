@@ -149,21 +149,7 @@ header::after {
   50% { box-shadow: 0 0 35px rgba(155,89,182,0.9); }
 }
 
-.donate-btn {
-  display: inline-block;
-  background: #00d632;
-  color: #000;
-  font-family: 'Bebas Neue', cursive;
-  font-size: 13px;
-  letter-spacing: 2px;
-  padding: 5px 12px;
-  border-radius: 4px;
-  text-decoration: none;
-  margin-left: 6px;
-  transition: background 0.2s, transform 0.1s;
-  white-space: nowrap;
-}
-.donate-btn:hover { background: #00ff3c; transform: scale(1.05); }
+.settings-btn {
   background: none;
   border: 1px solid var(--border);
   color: var(--dim);
@@ -968,117 +954,6 @@ header::after {
 }
 .has-tooltip:hover .tooltip { display: block; }
 
-/* ====== SKILL TREE ====== */
---skill: #00ff88;
-:root { --skill: #00ff88; --skill2: #00cc66; }
-
-.skill-pts-display {
-  background: #08160e;
-  border: 1px solid rgba(0,255,136,0.25);
-  border-radius: 4px;
-  padding: 8px 10px;
-  text-align: center;
-  margin-bottom: 6px;
-}
-.skill-pts-val {
-  font-family: 'Orbitron', monospace;
-  font-size: 20px;
-  font-weight: 700;
-  color: #00ff88;
-  display: block;
-}
-.skill-pts-label { font-size: 10px; color: var(--dim); letter-spacing: 2px; margin-top: 2px; }
-.skill-pts-sub { font-size: 10px; color: var(--dim); margin-top: 2px; }
-
-/* Skill tree branches */
-.skill-branch {
-  margin-bottom: 10px;
-}
-.skill-branch-title {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 12px;
-  letter-spacing: 3px;
-  color: #00ff88;
-  opacity: 0.7;
-  margin-bottom: 4px;
-  padding-left: 4px;
-  border-left: 2px solid #00ff8840;
-}
-
-.skill-node {
-  background: #080e0a;
-  border: 1px solid rgba(0,255,136,0.15);
-  border-radius: 4px;
-  padding: 8px 10px;
-  margin-bottom: 3px;
-  cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
-  overflow: hidden;
-}
-.skill-node::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: #00ff88;
-  opacity: 0.3;
-  transition: opacity 0.2s, width 0.2s;
-}
-.skill-node:hover:not(.sk-locked):not(.sk-maxed)::before { opacity: 1; width: 4px; }
-.skill-node:hover:not(.sk-locked):not(.sk-maxed) {
-  border-color: rgba(0,255,136,0.5);
-  background: #0c1a10;
-  transform: translateX(3px);
-  box-shadow: 0 0 12px rgba(0,255,136,0.12);
-}
-
-.skill-node.sk-locked { opacity: 0.28; cursor: not-allowed; }
-.skill-node.sk-maxed {
-  opacity: 0.55;
-  cursor: default;
-  border-color: rgba(0,255,136,0.35);
-}
-.skill-node.sk-maxed::before { background: #00ff88; opacity: 0.6; }
-
-.skill-node.sk-affordable {
-  border-color: rgba(0,255,136,0.4);
-  animation: skillPulse 2s ease-in-out infinite;
-}
-@keyframes skillPulse {
-  0%,100% { box-shadow: none; }
-  50% { box-shadow: 0 0 14px rgba(0,255,136,0.2); }
-}
-
-.skill-name {
-  font-weight: 700;
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #c0ffd8;
-}
-.skill-lvl-badge {
-  font-family: 'Orbitron', monospace;
-  font-size: 10px;
-  background: rgba(0,255,136,0.15);
-  color: #00ff88;
-  padding: 1px 6px;
-  border-radius: 3px;
-  border: 1px solid rgba(0,255,136,0.3);
-}
-.skill-desc { color: var(--dim); font-size: 10px; margin-top: 2px; }
-.skill-effect { color: #00cc66; font-size: 10px; margin-top: 1px; font-weight: 600; }
-.skill-cost { color: #00ff88; font-size: 11px; font-weight: 700; margin-top: 3px; opacity: 0.85; }
-
-/* milestone-banner skill variant */
-.milestone-banner.skill-banner {
-  border-color: #00ff88;
-  color: #00ff88;
-  background: linear-gradient(135deg, #001a0a, #003018);
-  box-shadow: 0 0 40px rgba(0,255,136,0.4);
-}
-
 /* ====== COLUMN SWITCHER BAR (mobile only) ====== */
 #col-switcher {
   display: none;
@@ -1186,7 +1061,6 @@ header::after {
     <div class="header-right">
       <div class="rebirth-badge" id="rebirth-badge">REBIRTH 0 ✦</div>
       <button class="settings-btn" onclick="exportSave()" title="Export save">💾</button>
-      <a class="donate-btn" href="https://cash.app/$pureoasisstores" target="_blank" rel="noopener">💚 DONATE</a>
     </div>
   </header>
 
@@ -1196,7 +1070,6 @@ header::after {
       <button class="tab-btn active" onclick="switchTab('upgrades')">UPGRADES</button>
       <button class="tab-btn" onclick="switchTab('achieve')">MEDALS</button>
       <button class="tab-btn" onclick="switchTab('stats')">STATS</button>
-      <button class="tab-btn" onclick="switchTab('leaderboard')">🏆</button>
     </div>
 
     <div id="tab-upgrades" class="tab-content active">
@@ -1216,30 +1089,6 @@ header::after {
       <div class="offline-section">
         <b>OFFLINE BONUS:</b> You earn 50% of your APS while away (up to 8 hours).<br>
         <span id="offline-rate-display" style="color:var(--accent2)"></span>
-      </div>
-    </div>
-
-    <div id="tab-leaderboard" class="tab-content">
-      <div class="panel-title">🏆 LEADERBOARD</div>
-      <div id="lb-name-row" style="display:flex;gap:6px;margin-bottom:8px;">
-        <input id="lb-name-input" placeholder="Your name..." maxlength="16"
-          style="flex:1;background:#0f0f1c;border:1px solid var(--border);color:var(--text);
-                 font-family:'Rajdhani',sans-serif;font-size:13px;padding:5px 8px;border-radius:4px;"/>
-        <button onclick="lbSubmit()"
-          style="background:var(--accent);border:none;color:#fff;font-family:'Bebas Neue',cursive;
-                 font-size:13px;letter-spacing:1px;padding:5px 10px;border-radius:4px;cursor:pointer;">
-          POST
-        </button>
-      </div>
-      <div id="lb-list" style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
-        <div style="color:var(--dim);text-align:center;padding:12px;">Loading...</div>
-      </div>
-      <div style="margin-top:8px;text-align:center;">
-        <button onclick="lbLoad()"
-          style="background:none;border:1px solid var(--border);color:var(--dim);font-family:'Bebas Neue',cursive;
-                 font-size:12px;letter-spacing:1px;padding:4px 10px;border-radius:4px;cursor:pointer;">
-          ↺ REFRESH
-        </button>
       </div>
     </div>
   </div>
@@ -1277,7 +1126,6 @@ header::after {
     <div class="rtab-nav">
       <button class="rtab-btn active" onclick="switchRTab('arsenal')">ARSENAL</button>
       <button class="rtab-btn" onclick="switchRTab('prestige')">PRESTIGE</button>
-      <button class="rtab-btn" onclick="switchRTab('skills')">🌿 SKILLS</button>
       <button class="rtab-btn" onclick="switchRTab('rebirth')">REBIRTH</button>
     </div>
 
@@ -1295,21 +1143,11 @@ header::after {
       <div id="prestige-list"></div>
     </div>
 
-    <div id="rtab-skills" class="rtab-content">
-      <div class="panel-title" style="color:#00ff88;border-color:#00ff8840;">🌿 SKILL TREE</div>
-      <div class="skill-pts-display">
-        <span class="skill-pts-val" id="skill-pts-display">0</span>
-        <div class="skill-pts-label">SKILL POINTS</div>
-        <div class="skill-pts-sub" id="skill-pts-spent-display"></div>
-      </div>
-      <div id="skill-tree-list"></div>
-    </div>
-
     <div id="rtab-rebirth" class="rtab-content">
       <div class="panel-title" style="color:#d8b4fe;border-color:#3d1a5e;">♻ REBIRTH</div>
       <div id="rebirth-cost-info" class="rebirth-info" style="margin-bottom:6px;font-size:12px;"></div>
       <button class="rebirth-btn" id="rebirth-btn" disabled onclick="doRebirth()">⟳ REBIRTH</button>
-      <div class="rebirth-info" style="margin-top:6px;">Resets ammo, weapons & upgrades.<br>Grants permanent <span class="rebirth-bonus">×1.5</span> multiplier + <span style="color:#00ff88">1 Skill Point</span>.</div>
+      <div class="rebirth-info" style="margin-top:6px;">Resets ammo, weapons & upgrades.<br>Grants permanent <span class="rebirth-bonus">×1.5</span> multiplier.</div>
       <div class="rebirth-info" id="rebirth-bonus-display"></div>
       <div class="sep" style="margin-top:8px"></div>
       <div class="rebirth-info" style="font-size:12px;margin-top:4px;color:var(--dim)">
@@ -1333,89 +1171,54 @@ header::after {
 // ============================================================
 
 const UPGRADES = [
-  // -- CLICK TREE --
-  { id:'u1',  name:'Sharpened Sight',    icon:'🎯', desc:'+2 per click',            cost:30,         clickBonus:2,    requires:null },
-  { id:'u2',  name:'Hollow Points',      icon:'🔴', desc:'×2 click power',           cost:150,        clickMult:2,     requires:null },
-  { id:'u3',  name:'Hair Trigger',       icon:'⚡', desc:'+8 per click',             cost:800,        clickBonus:8,    requires:'u1' },
-  { id:'u4',  name:'Drum Magazine',      icon:'🥁', desc:'+25 per click',            cost:5000,       clickBonus:25,   requires:'u3' },
-  { id:'u5',  name:'Explosive Rounds',   icon:'💥', desc:'×3 click power',           cost:25000,      clickMult:3,     requires:'u2' },
-  { id:'u6',  name:'Incendiary Shells',  icon:'🔥', desc:'+100 per click',           cost:150000,     clickBonus:100,  requires:'u4' },
-  { id:'u7',  name:'AP Rounds',          icon:'🛡', desc:'×6 click power',           cost:1000000,    clickMult:6,     requires:'u5' },
-  { id:'u8',  name:'Railgun Slug',       icon:'⚙', desc:'+500 per click',           cost:8000000,    clickBonus:500,  requires:'u6' },
-  { id:'u9',  name:'Nuclear Warhead',    icon:'☢', desc:'×12 click power',          cost:80000000,   clickMult:12,    requires:'u7' },
-  { id:'u10', name:'Antimatter Core',    icon:'🌀', desc:'×30 click power',          cost:1e9,        clickMult:30,    requires:'u9' },
-  { id:'u19', name:'Quantum Bullets',    icon:'⚛', desc:'×75 click power',          cost:5e10,       clickMult:75,    requires:'u10' },
-  { id:'u21', name:'Dark Matter Shot',   icon:'🕳', desc:'×200 click power',         cost:5e12,       clickMult:200,   requires:'u19' },
-  // -- APS TREE --
-  { id:'u11', name:'Auto-Loader',        icon:'🔄', desc:'+3 ammo/sec',              cost:250,        apsBonus:3,      requires:null },
-  { id:'u12', name:'Ammo Factory',       icon:'🏭', desc:'×2.5 all production',      cost:4000,       apsMult:2.5,     requires:'u11' },
-  { id:'u13', name:'Weapons Depot',      icon:'📦', desc:'+35 ammo/sec',             cost:25000,      apsBonus:35,     requires:'u11' },
-  { id:'u14', name:'Military Complex',   icon:'🪖', desc:'×4 all production',        cost:200000,     apsMult:4,       requires:'u12' },
-  { id:'u15', name:'Black Site',         icon:'🕵', desc:'+300 ammo/sec',            cost:2000000,    apsBonus:300,    requires:'u13' },
-  { id:'u16', name:'War Economy',        icon:'💰', desc:'×8 all production',        cost:20000000,   apsMult:8,       requires:'u14' },
-  { id:'u17', name:'Death Star Array',   icon:'🌟', desc:'+3000 ammo/sec',           cost:300000000,  apsBonus:3000,   requires:'u15' },
-  { id:'u18', name:'Universal Arsenal',  icon:'🌌', desc:'×20 all production',       cost:5e9,        apsMult:20,      requires:'u16' },
-  { id:'u20', name:'God Mode',           icon:'👁', desc:'×60 all production',       cost:2e11,       apsMult:60,      requires:'u18' },
-  { id:'u22', name:'Singularity Engine', icon:'💠', desc:'×150 all production',      cost:1e13,       apsMult:150,     requires:'u20' },
-  { id:'u23', name:'Omega Protocol',     icon:'🔱', desc:'×500 all production',      cost:1e15,       apsMult:500,     requires:'u22' },
-  // ── OCTILLION WALL (1e27–1e50) ── requires multiple rebirths to reach
-  { id:'u24', name:'Void Forge',          icon:'🌑', desc:'+5T ammo/sec',              cost:8e16,       apsBonus:5e12,   requires:'u23' },
-  { id:'u25', name:'Entropy Engine',      icon:'🌀', desc:'×1500 all production',      cost:2e18,       apsMult:1500,    requires:'u24' },
-  { id:'u26', name:'Dimensional Rift',    icon:'🕳', desc:'+50T ammo/sec',             cost:9e19,       apsBonus:5e13,   requires:'u24' },
-  { id:'u27', name:'Null Cannon',         icon:'⬛', desc:'×5000 click power',         cost:5e20,       clickMult:5000,  requires:'u21' },
-  { id:'u28', name:'Quantum Collapse',    icon:'💠', desc:'×8000 all production',      cost:4e22,       apsMult:8000,    requires:'u25' },
-  { id:'u29', name:'Supernova Strike',    icon:'💥', desc:'+500T ammo/sec',            cost:3e23,       apsBonus:5e14,   requires:'u26' },
-  { id:'u30', name:'Event Horizon',       icon:'⚫', desc:'×30000 click power',        cost:1e25,       clickMult:30000, requires:'u27' },
-  { id:'u31', name:'Reality Shatter',     icon:'💫', desc:'×25000 all production',     cost:7e26,       apsMult:25000,   requires:'u28' },
-  { id:'u32', name:'Infinite Loop',       icon:'♾', desc:'+5Qa ammo/sec',             cost:6e27,       apsBonus:5e15,   requires:'u29' },
-  { id:'u33', name:'Cosmic Obliterator',  icon:'🌌', desc:'×100K click power',         cost:5e29,       clickMult:100000,requires:'u30' },
-  { id:'u34', name:'Entropy Cascade',     icon:'🔥', desc:'×100K all production',      cost:3e31,       apsMult:100000,  requires:'u31' },
-  { id:'u35', name:'Omega Singularity',   icon:'👁', desc:'×500K all production',      cost:2e34,       apsMult:500000,  requires:'u34' },
-  { id:'u36', name:'Universe Unraveler',  icon:'🌠', desc:'×2M all production',        cost:1e38,       apsMult:2000000, requires:'u35' },
-  { id:'u37', name:'Death of Reality',    icon:'💀', desc:'×10M all production',       cost:9e42,       apsMult:10000000,requires:'u36' },
-  { id:'u38', name:'God Particle',        icon:'⚡', desc:'×50M all production',       cost:5e47,       apsMult:50000000,requires:'u37' },
-  { id:'u39', name:'Absolute Zero Click', icon:'❄', desc:'×1B click power',           cost:1e52,       clickMult:1e9,   requires:'u33' },
-  { id:'u40', name:'Eternity Forge',      icon:'🌅', desc:'×500M all production',      cost:8e52,       apsMult:5e8,     requires:'u38' },
+  { id:'u1',  name:'Sharpened Sight',   icon:'🎯', desc:'+1 per click',          cost:25,        clickBonus:1,   requires:null },
+  { id:'u2',  name:'Hollow Points',     icon:'🔴', desc:'×2 click power',         cost:100,       clickMult:2,    requires:null },
+  { id:'u3',  name:'Hair Trigger',      icon:'⚡', desc:'+5 per click',           cost:400,       clickBonus:5,   requires:'u1' },
+  { id:'u4',  name:'Drum Magazine',     icon:'🥁', desc:'+15 per click',          cost:1500,      clickBonus:15,  requires:'u3' },
+  { id:'u5',  name:'Explosive Rounds',  icon:'💥', desc:'×3 click power',         cost:8000,      clickMult:3,    requires:'u2' },
+  { id:'u6',  name:'Incendiary Shells', icon:'🔥', desc:'+50 per click',          cost:30000,     clickBonus:50,  requires:'u4' },
+  { id:'u7',  name:'AP Rounds',         icon:'🛡', desc:'×5 click power',         cost:150000,    clickMult:5,    requires:'u5' },
+  { id:'u8',  name:'Railgun Slug',      icon:'⚙', desc:'+200 per click',         cost:800000,    clickBonus:200, requires:'u6' },
+  { id:'u9',  name:'Nuclear Warhead',   icon:'☢', desc:'×10 click power',        cost:5000000,   clickMult:10,   requires:'u7' },
+  { id:'u10', name:'Antimatter Core',   icon:'🌀', desc:'×25 click power',        cost:50000000,  clickMult:25,   requires:'u9' },
+  { id:'u11', name:'Auto-Loader',       icon:'🔄', desc:'+2 ammo/sec',            cost:200,       apsBonus:2,     requires:null },
+  { id:'u12', name:'Ammo Factory',      icon:'🏭', desc:'×2 all production',      cost:2500,      apsMult:2,      requires:'u11' },
+  { id:'u13', name:'Weapons Depot',     icon:'📦', desc:'+20 ammo/sec',           cost:12000,     apsBonus:20,    requires:'u11' },
+  { id:'u14', name:'Military Complex',  icon:'🪖', desc:'×3 all production',      cost:75000,     apsMult:3,      requires:'u12' },
+  { id:'u15', name:'Black Site',        icon:'🕵', desc:'+150 ammo/sec',          cost:500000,    apsBonus:150,   requires:'u13' },
+  { id:'u16', name:'War Economy',       icon:'💰', desc:'×5 all production',      cost:4000000,   apsMult:5,      requires:'u14' },
+  { id:'u17', name:'Death Star Array',  icon:'🌟', desc:'+1000 ammo/sec',         cost:25000000,  apsBonus:1000,  requires:'u15' },
+  { id:'u18', name:'Universal Arsenal', icon:'🌌', desc:'×15 all production',     cost:200000000, apsMult:15,     requires:'u16' },
+  { id:'u19', name:'Quantum Bullets',   icon:'⚛', desc:'×50 click power',        cost:2e9,       clickMult:50,   requires:'u10' },
+  { id:'u20', name:'God Mode',          icon:'👁', desc:'×100 all production',    cost:5e10,      apsMult:100,    requires:'u18' },
 ];
 
 const WEAPONS = [
-  // Early — cheap but very low APS, cost scales fast so you feel the grind early
-  { id:'w1',  name:'Slingshot',        icon:'🪨', desc:'+0.1/sec each',   baseCost:15,        aps:0.1,    costMult:1.12 },
-  { id:'w2',  name:'Bow & Arrow',      icon:'🏹', desc:'+0.6/sec each',   baseCost:100,       aps:0.6,    costMult:1.14 },
-  { id:'w3',  name:'Dagger',           icon:'🗡️', desc:'+2.5/sec each',   baseCost:600,       aps:2.5,    costMult:1.17 },
-  { id:'w4',  name:'Pistol',           icon:'🔫', desc:'+8/sec each',     baseCost:3500,      aps:8,      costMult:1.21 },
-  { id:'w5',  name:'Grenade',          icon:'💣', desc:'+22/sec each',    baseCost:20000,     aps:22,     costMult:1.25 },
-  // Mid — bigger APS jumps, costs get steep fast
-  { id:'w6',  name:'Sword',            icon:'⚔️', desc:'+70/sec each',    baseCost:130000,    aps:70,     costMult:1.30 },
-  { id:'w7',  name:'Sniper Rifle',     icon:'🎯', desc:'+200/sec each',   baseCost:900000,    aps:200,    costMult:1.35 },
-  { id:'w8',  name:'Missile',          icon:'🚀', desc:'+600/sec each',   baseCost:7000000,   aps:600,    costMult:1.40 },
-  { id:'w9',  name:'Fighter Jet',      icon:'✈️', desc:'+2000/sec each',  baseCost:60000000,  aps:2000,   costMult:1.45 },
-  // Late — massive APS but wall-of-cost, each one feels like a milestone
-  { id:'w10', name:'Tank',             icon:'🚂', desc:'+7000/sec each',  baseCost:5e8,       aps:7000,   costMult:1.50 },
-  { id:'w11', name:'Warship',          icon:'⚓', desc:'+25000/sec each', baseCost:6e9,       aps:25000,  costMult:1.55 },
-  { id:'w12', name:'Satellite Laser',  icon:'🛸', desc:'+100000/sec each',baseCost:8e10,      aps:100000, costMult:1.60 },
-  { id:'w13', name:'Nuclear Bomb',     icon:'☢️', desc:'+400000/sec each',baseCost:1.5e12,    aps:400000, costMult:1.65 },
-  { id:'w14', name:'Dyson Sphere',     icon:'🌌', desc:'+2M/sec each',    baseCost:3e13,      aps:2000000,costMult:1.70 },
-  // End-game — prestige-tier weapons, almost unreachable without rebirths
-  { id:'w15', name:'Antimatter Bomb',  icon:'💥', desc:'+10M/sec each',   baseCost:1e15,      aps:10000000,costMult:1.75 },
-  { id:'w16', name:'Void Rift',        icon:'🌀', desc:'+60M/sec each',   baseCost:5e16,      aps:60000000,costMult:1.80 },
-  { id:'w17', name:'Galaxy Shredder',  icon:'⚡', desc:'+500M/sec each',  baseCost:2e18,      aps:500000000,costMult:1.85 },
+  { id:'w1',  name:'Slingshot',       icon:'🪃', desc:'+0.1/sec',  baseCost:15,       aps:0.1   },
+  { id:'w2',  name:'Crossbow',        icon:'🏹', desc:'+0.5/sec',  baseCost:80,       aps:0.5   },
+  { id:'w3',  name:'Musket',          icon:'🔫', desc:'+2/sec',    baseCost:400,      aps:2     },
+  { id:'w4',  name:'Revolver',        icon:'🔄', desc:'+5/sec',    baseCost:1800,     aps:5     },
+  { id:'w5',  name:'Shotgun',         icon:'💥', desc:'+12/sec',   baseCost:8000,     aps:12    },
+  { id:'w6',  name:'Assault Rifle',   icon:'⚔', desc:'+30/sec',   baseCost:40000,    aps:30    },
+  { id:'w7',  name:'Sniper Rifle',    icon:'🎯', desc:'+75/sec',   baseCost:180000,   aps:75    },
+  { id:'w8',  name:'Rocket Launcher', icon:'🚀', desc:'+200/sec',  baseCost:900000,   aps:200   },
+  { id:'w9',  name:'Minigun',         icon:'🌀', desc:'+500/sec',  baseCost:5000000,  aps:500   },
+  { id:'w10', name:'Tank Cannon',     icon:'🛡', desc:'+1500/sec', baseCost:25000000, aps:1500  },
+  { id:'w11', name:'Battleship Gun',  icon:'⚓', desc:'+5000/sec', baseCost:150000000,aps:5000  },
+  { id:'w12', name:'Orbital Laser',   icon:'☀', desc:'+15000/sec',baseCost:1e9,      aps:15000 },
+  { id:'w13', name:'Nuke Silo',       icon:'☢', desc:'+50000/sec',baseCost:1e11,     aps:50000 },
+  { id:'w14', name:'Dyson Sphere',    icon:'🌌', desc:'+200000/sec',baseCost:1e13,   aps:200000},
 ];
 
-// Rebirth requirement scales infinitely: each rebirth beyond the list multiplies by 50×
 const REBIRTHS = [
-  { need:5e6,   label:'ARMED & READY' },
-  { need:5e8,   label:'WAR MACHINE' },
-  { need:1e11,  label:'ARMS DEALER' },
-  { need:5e13,  label:'WARLORD' },
-  { need:5e16,  label:'GOD OF WAR' },
-  { need:1e20,  label:'DEATH INCARNATE' },
-  { need:1e24,  label:'UNIVERSE DESTROYER' },
-  { need:1e28,  label:'OMNIPOTENT' },
-  { need:1e33,  label:'REALITY BREAKER' },
-  { need:1e39,  label:'DIMENSION LORD' },
-  { need:1e46,  label:'SINGULARITY' },
-  { need:1e54,  label:'ETERNAL DESTROYER' },
+  { need:1e6,  label:'ARMED & READY' },
+  { need:1e8,  label:'WAR MACHINE' },
+  { need:1e10, label:'ARMS DEALER' },
+  { need:1e12, label:'WARLORD' },
+  { need:1e14, label:'GOD OF WAR' },
+  { need:1e16, label:'DEATH INCARNATE' },
+  { need:1e18, label:'UNIVERSE DESTROYER' },
+  { need:1e20, label:'OMNIPOTENT' },
 ];
 
 const ACHIEVEMENTS = [
@@ -1438,66 +1241,14 @@ const ACHIEVEMENTS = [
 ];
 
 const PRESTIGE_UPGRADES = [
-  // Tier 1 — cheap, small but real gains (1-2 pts)
-  { id:'p1',  name:'Battle Hardened',    icon:'💪', desc:'+15% click power permanently',    cost:1,  clickBonus:0.15  },
-  { id:'p2',  name:'War Economy',        icon:'📈', desc:'+15% APS permanently',             cost:1,  apsBonus:0.15   },
-  { id:'p3',  name:'Steady Hands',       icon:'🤝', desc:'+25% click power permanently',    cost:2,  clickBonus:0.25  },
-  { id:'p4',  name:'Industrial Scale',   icon:'🏗', desc:'+25% APS permanently',             cost:2,  apsBonus:0.25   },
-  { id:'p5',  name:'Double Tap',         icon:'✌', desc:'+50% click power permanently',    cost:2,  clickBonus:0.50  },
-  { id:'p6',  name:'Mass Production',    icon:'⚙', desc:'+50% APS permanently',             cost:2,  apsBonus:0.50   },
-  // Tier 2 — special abilities (3-5 pts)
-  { id:'p7',  name:'Crit Chance',        icon:'💥', desc:'10% chance for 5× crit clicks',   cost:3,  crit:true       },
-  { id:'p8',  name:'Auto-Fire',          icon:'🤖', desc:'Auto-click 1/sec while idle 3s',  cost:3,  autoClick:true  },
-  { id:'p9',  name:'Focused Fire',       icon:'🎯', desc:'+100% click power permanently',   cost:4,  clickBonus:1.0  },
-  { id:'p10', name:'Supply Line',        icon:'📦', desc:'+100% APS permanently',            cost:4,  apsBonus:1.0    },
-  { id:'p11', name:'War God',            icon:'⚡', desc:'×2 all production permanently',   cost:5,  allMult:1.0     },
-  { id:'p12', name:'Iron Will',          icon:'🛡', desc:'+200% click power permanently',   cost:6,  clickBonus:2.0  },
-  { id:'p13', name:'Arsenal Surge',      icon:'🌊', desc:'+200% APS permanently',            cost:6,  apsBonus:2.0    },
-  // Tier 3 — big multipliers (8-15 pts)
-  { id:'p14', name:'Warlord',            icon:'👑', desc:'×3 all production permanently',   cost:8,  allMult:2.0     },
-  { id:'p15', name:'Death Machine',      icon:'💀', desc:'+500% click power permanently',   cost:10, clickBonus:5.0  },
-  { id:'p16', name:'Infinite Ammo',      icon:'♾', desc:'+500% APS permanently',            cost:10, apsBonus:5.0    },
-  { id:'p17', name:'Nuclear Option',     icon:'☢', desc:'×5 all production permanently',   cost:12, allMult:4.0     },
-  { id:'p18', name:'God of War',         icon:'🔱', desc:'×8 all production permanently',   cost:15, allMult:7.0     },
-  // Tier 4 — endgame (20-40 pts)
-  { id:'p19', name:'Omnipotence',        icon:'🌌', desc:'×15 all production permanently',  cost:20, allMult:14.0    },
-  { id:'p20', name:'Reality Forged',     icon:'🌀', desc:'+2000% click power permanently',  cost:25, clickBonus:20.0 },
-  { id:'p21', name:'Universe Engine',    icon:'🌠', desc:'+2000% APS permanently',           cost:25, apsBonus:20.0   },
-  { id:'p22', name:'Singularity',        icon:'⚫', desc:'×50 all production permanently',  cost:35, allMult:49.0    },
-  { id:'p23', name:'Big Bang',           icon:'💫', desc:'×100 all production permanently', cost:50, allMult:99.0    },
-];
-
-// ============================================================
-// SKILL TREE  — earned 1 point per rebirth, NEVER reset
-// 4 branches: Firepower, Production, Efficiency, Transcendence
-// Each skill has maxLevel — costs increase per level
-// ============================================================
-const SKILL_TREE = [
-  // ── BRANCH 1: FIREPOWER (click damage) ──
-  { branch:'FIREPOWER', id:'sk1',  name:'Iron Fist',         icon:'👊', desc:'Click power +10% per level',    maxLvl:10, baseCost:1,  costPerLvl:1,  effect: s => ({ clickBonus: s * 0.10 }) },
-  { branch:'FIREPOWER', id:'sk2',  name:'Hair-Trigger Mind', icon:'⚡', desc:'Click power ×1.3 per level',    maxLvl:8,  baseCost:2,  costPerLvl:2,  effect: s => ({ clickMult: Math.pow(1.3, s) }), requires:'sk1' },
-  { branch:'FIREPOWER', id:'sk3',  name:'Critical Mass',     icon:'💥', desc:'Crit mult +0.5× per level',     maxLvl:6,  baseCost:3,  costPerLvl:2,  effect: s => ({ critMult: s * 0.5 }), requires:'sk2' },
-  { branch:'FIREPOWER', id:'sk4',  name:'Fury Mode',         icon:'🔥', desc:'Click power ×2.0 per level',    maxLvl:5,  baseCost:5,  costPerLvl:3,  effect: s => ({ clickMult: Math.pow(2.0, s) }), requires:'sk3' },
-  { branch:'FIREPOWER', id:'sk5',  name:'God Fist',          icon:'☄',  desc:'Click power ×10 per level',     maxLvl:3,  baseCost:10, costPerLvl:5,  effect: s => ({ clickMult: Math.pow(10, s) }), requires:'sk4' },
-  // ── BRANCH 2: PRODUCTION (APS) ──
-  { branch:'PRODUCTION', id:'sk6',  name:'Assembly Line',    icon:'🏭', desc:'APS +10% per level',             maxLvl:10, baseCost:1,  costPerLvl:1,  effect: s => ({ apsBonus: s * 0.10 }) },
-  { branch:'PRODUCTION', id:'sk7',  name:'War Machine',      icon:'⚙', desc:'APS ×1.3 per level',             maxLvl:8,  baseCost:2,  costPerLvl:2,  effect: s => ({ apsMult: Math.pow(1.3, s) }), requires:'sk6' },
-  { branch:'PRODUCTION', id:'sk8',  name:'Supply Chain',     icon:'📦', desc:'APS +50% per level',             maxLvl:6,  baseCost:3,  costPerLvl:2,  effect: s => ({ apsBonus: s * 0.50 }), requires:'sk7' },
-  { branch:'PRODUCTION', id:'sk9',  name:'Industrial God',   icon:'🌐', desc:'APS ×2.5 per level',             maxLvl:5,  baseCost:5,  costPerLvl:3,  effect: s => ({ apsMult: Math.pow(2.5, s) }), requires:'sk8' },
-  { branch:'PRODUCTION', id:'sk10', name:'Factory Singularity',icon:'🏗',desc:'APS ×15 per level',             maxLvl:3,  baseCost:10, costPerLvl:5,  effect: s => ({ apsMult: Math.pow(15, s) }), requires:'sk9' },
-  // ── BRANCH 3: EFFICIENCY ──
-  { branch:'EFFICIENCY', id:'sk11', name:'Bargain Hunter',   icon:'💰', desc:'Weapon costs -5% per level',     maxLvl:8,  baseCost:1,  costPerLvl:1,  effect: s => ({ costDiscount: s * 0.05 }) },
-  { branch:'EFFICIENCY', id:'sk12', name:'Speed Loader',     icon:'🔄', desc:'Auto-buy speed ×1.5 per level',  maxLvl:6,  baseCost:2,  costPerLvl:2,  effect: s => ({ autoBuySpeed: Math.pow(1.5, s) }), requires:'sk11' },
-  { branch:'EFFICIENCY', id:'sk13', name:'Offline Grind',    icon:'💤', desc:'Offline gain +20% per level',    maxLvl:5,  baseCost:2,  costPerLvl:2,  effect: s => ({ offlineBonus: s * 0.20 }), requires:'sk11' },
-  { branch:'EFFICIENCY', id:'sk14', name:'Prestige Mastery', icon:'💎', desc:'Prestige pts gained +1 per level',maxLvl:5,  baseCost:3,  costPerLvl:2,  effect: s => ({ prestigeBonus: s }), requires:'sk12' },
-  { branch:'EFFICIENCY', id:'sk15', name:'Rebirth Rush',     icon:'♻', desc:'Rebirth mult +5% per level',     maxLvl:8,  baseCost:4,  costPerLvl:3,  effect: s => ({ rebirthBonus: s * 0.05 }), requires:'sk13' },
-  // ── BRANCH 4: TRANSCENDENCE (endgame) ──
-  { branch:'TRANSCENDENCE', id:'sk16', name:'Void Touch',    icon:'🌑', desc:'All prod ×1.5 per level',        maxLvl:5,  baseCost:5,  costPerLvl:4,  effect: s => ({ allMult: Math.pow(1.5, s) }), requires:'sk5' },
-  { branch:'TRANSCENDENCE', id:'sk17', name:'Entropy Drain', icon:'⬛', desc:'All prod ×2 per level',          maxLvl:4,  baseCost:8,  costPerLvl:5,  effect: s => ({ allMult: Math.pow(2, s) }), requires:'sk10' },
-  { branch:'TRANSCENDENCE', id:'sk18', name:'Singularity Touch',icon:'💠',desc:'All prod ×5 per level',        maxLvl:3,  baseCost:12, costPerLvl:6,  effect: s => ({ allMult: Math.pow(5, s) }), requires:'sk16' },
-  { branch:'TRANSCENDENCE', id:'sk19', name:'Omega Awakening',icon:'👁', desc:'All prod ×20 per level',        maxLvl:3,  baseCost:18, costPerLvl:8,  effect: s => ({ allMult: Math.pow(20, s) }), requires:'sk17' },
-  { branch:'TRANSCENDENCE', id:'sk20', name:'Reality Engine', icon:'🌅', desc:'All prod ×100 per level',       maxLvl:2,  baseCost:25, costPerLvl:12, effect: s => ({ allMult: Math.pow(100, s) }), requires:'sk18' },
-  { branch:'TRANSCENDENCE', id:'sk21', name:'Big Bang Core',  icon:'💫', desc:'All prod ×1000 per level',      maxLvl:1,  baseCost:40, costPerLvl:20, effect: s => ({ allMult: Math.pow(1000, s) }), requires:'sk20' },
+  { id:'p1', name:'Battle Hardened',    icon:'💪', desc:'+10% base click power permanently', cost:1,  clickBonus:0.1, purchased:false },
+  { id:'p2', name:'War Economy',        icon:'📈', desc:'+10% APS permanently',              cost:1,  apsBonus:0.1,   purchased:false },
+  { id:'p3', name:'Double Tap',         icon:'✌', desc:'+25% click power permanently',      cost:2,  clickBonus:0.25,purchased:false },
+  { id:'p4', name:'Industrial Scale',   icon:'🏗', desc:'+25% APS permanently',              cost:2,  apsBonus:0.25,  purchased:false },
+  { id:'p5', name:'Crit Chance',        icon:'💥', desc:'10% chance for 5× crit clicks',    cost:3,  crit:true,      purchased:false },
+  { id:'p6', name:'Auto-Fire',          icon:'🤖', desc:'Auto-click 1/sec while idle 3s',   cost:3,  autoClick:true, purchased:false },
+  { id:'p7', name:'War God',            icon:'⚡', desc:'+100% all production permanently',  cost:5,  allMult:1.0,    purchased:false },
+  { id:'p8', name:'Omnipotence',        icon:'🌌', desc:'+300% all production permanently',  cost:10, allMult:3.0,    purchased:false },
 ];
 
 // ============================================================
@@ -1515,9 +1266,6 @@ let state = {
   weapons: {},
   prestige: {},
   achievements: {},
-  skills: {},           // { sk1: 3, sk6: 1, ... } — levels per skill
-  skillPoints: 0,       // spendable
-  totalSkillPoints: 0,  // lifetime earned
   lastTick: Date.now(),
   lastSave: Date.now(),
   bestAPS: 0,
@@ -1543,47 +1291,12 @@ function getPrestigeMult(type) {
   return (1 + bonus) * (1 + allBonus);
 }
 
-// Aggregate all skill effects into a flat bonus object
-function getSkillEffects() {
-  let clickBonus = 0, clickMult = 1, apsBonus = 0, apsMult = 1;
-  let allMult = 1, critMult = 0, costDiscount = 0;
-  let offlineBonus = 0, prestigeBonus = 0, rebirthBonus = 0, autoBuySpeed = 1;
-  for (const sk of SKILL_TREE) {
-    const lvl = state.skills[sk.id] || 0;
-    if (lvl === 0) continue;
-    const e = sk.effect(lvl);
-    if (e.clickBonus)    clickBonus    += e.clickBonus;
-    if (e.clickMult)     clickMult     *= e.clickMult;
-    if (e.apsBonus)      apsBonus      += e.apsBonus;
-    if (e.apsMult)       apsMult       *= e.apsMult;
-    if (e.allMult)       allMult       *= e.allMult;
-    if (e.critMult)      critMult      += e.critMult;
-    if (e.costDiscount)  costDiscount  = Math.min(0.80, costDiscount + e.costDiscount);
-    if (e.offlineBonus)  offlineBonus  += e.offlineBonus;
-    if (e.prestigeBonus) prestigeBonus += e.prestigeBonus;
-    if (e.rebirthBonus)  rebirthBonus  += e.rebirthBonus;
-    if (e.autoBuySpeed)  autoBuySpeed  *= e.autoBuySpeed;
-  }
-  return { clickBonus, clickMult, apsBonus, apsMult, allMult, critMult, costDiscount, offlineBonus, prestigeBonus, rebirthBonus, autoBuySpeed };
-}
-
-function skillCost(sk) {
-  const lvl = state.skills[sk.id] || 0;
-  return sk.baseCost + lvl * sk.costPerLvl;
-}
-
 function hasCrit() {
-  return !!state.prestige['p7'];
+  return !!state.prestige['p5'];
 }
 
 function hasAutoClick() {
-  return !!state.prestige['p8'];
-}
-
-function getCritMult() {
-  const base = 5;
-  const skBonus = getSkillEffects().critMult;
-  return base + skBonus;
+  return !!state.prestige['p6'];
 }
 
 function getClickPower(isCrit) {
@@ -1594,11 +1307,8 @@ function getClickPower(isCrit) {
     if (u.clickBonus) base += u.clickBonus;
     if (u.clickMult) mult *= u.clickMult;
   }
-  const sk = getSkillEffects();
-  base *= (1 + sk.clickBonus);
-  mult *= sk.clickMult * sk.allMult;
   let power = Math.floor(base * mult * state.rebirthMult * getPrestigeMult('click'));
-  if (isCrit) power *= getCritMult();
+  if (isCrit) power *= 5;
   return power;
 }
 
@@ -1613,24 +1323,18 @@ function getAPS() {
     if (u.apsBonus) apsBonus += u.apsBonus;
     if (u.apsMult) apsMult *= u.apsMult;
   }
-  const sk = getSkillEffects();
-  const totalAPS = (weaponAPS + apsBonus) * (1 + sk.apsBonus) * apsMult * sk.apsMult * sk.allMult;
-  return totalAPS * state.rebirthMult * getPrestigeMult('aps');
+  return (weaponAPS + apsBonus) * apsMult * state.rebirthMult * getPrestigeMult('aps');
 }
 
 function getWeaponCost(w) {
-  const base = Math.floor(w.baseCost * Math.pow(w.costMult || 1.15, state.weapons[w.id] || 0));
-  const discount = getSkillEffects().costDiscount;
-  return Math.max(1, Math.floor(base * (1 - discount)));
+  return Math.floor(w.baseCost * Math.pow(1.15, state.weapons[w.id] || 0));
 }
 
 function getRebirthRequirement() {
-  if (state.rebirths < REBIRTHS.length) {
-    return REBIRTHS[state.rebirths].need;
-  }
-  // Beyond the list: last entry × 50^(rebirths - list length + 1)
-  const extra = state.rebirths - REBIRTHS.length + 1;
-  return REBIRTHS[REBIRTHS.length - 1].need * Math.pow(50, extra);
+  const idx = Math.min(state.rebirths, REBIRTHS.length - 1);
+  return REBIRTHS[idx]
+    ? REBIRTHS[idx].need
+    : REBIRTHS[REBIRTHS.length-1].need * Math.pow(100, state.rebirths - REBIRTHS.length + 1);
 }
 
 function fmtNum(n) {
@@ -1747,92 +1451,12 @@ function renderPrestige() {
   }
 }
 
-function renderSkillTree() {
-  const container = document.getElementById('skill-tree-list');
-  if (!container) return;
-
-  const spEl = document.getElementById('skill-pts-display');
-  if (spEl) spEl.textContent = state.skillPoints || 0;
-  const spSub = document.getElementById('skill-pts-spent-display');
-  if (spSub) {
-    const total = state.totalSkillPoints || 0;
-    const avail = state.skillPoints || 0;
-    spSub.textContent = `${total - avail} spent · ${total} lifetime`;
-  }
-
-  const branches = [...new Set(SKILL_TREE.map(s => s.branch))];
-  container.innerHTML = '';
-
-  for (const branch of branches) {
-    const branchDiv = document.createElement('div');
-    branchDiv.className = 'skill-branch';
-    branchDiv.innerHTML = `<div class="skill-branch-title">${branch}</div>`;
-
-    const skills = SKILL_TREE.filter(s => s.branch === branch);
-    for (const sk of skills) {
-      const lvl = state.skills[sk.id] || 0;
-      const maxed = lvl >= sk.maxLvl;
-      const reqLvl = sk.requires ? (state.skills[sk.requires] || 0) : 1;
-      const reqMet = !sk.requires || reqLvl > 0;
-      const cost = skillCost(sk);
-      const canAfford = (state.skillPoints || 0) >= cost;
-
-      let cls = 'skill-node';
-      if (!reqMet) cls += ' sk-locked';
-      else if (maxed) cls += ' sk-maxed';
-      else if (canAfford) cls += ' sk-affordable';
-
-      const effectVal = maxed ? sk.effect(lvl) : sk.effect(lvl + 1);
-      let effectPreview = '';
-      if (effectVal.clickBonus)    effectPreview = `+${Math.round(effectVal.clickBonus * 100)}% click`;
-      else if (effectVal.clickMult) effectPreview = `×${effectVal.clickMult.toFixed(1)} click`;
-      else if (effectVal.apsBonus)  effectPreview = `+${Math.round(effectVal.apsBonus * 100)}% APS`;
-      else if (effectVal.apsMult)   effectPreview = `×${effectVal.apsMult.toFixed(1)} APS`;
-      else if (effectVal.allMult)   effectPreview = `×${effectVal.allMult.toFixed(effectVal.allMult < 10 ? 1 : 0)} all`;
-      else if (effectVal.critMult)  effectPreview = `+${effectVal.critMult}× crit`;
-      else if (effectVal.costDiscount) effectPreview = `-${Math.round(effectVal.costDiscount * 100)}% cost`;
-      else if (effectVal.offlineBonus) effectPreview = `+${Math.round(effectVal.offlineBonus * 100)}% offline`;
-      else if (effectVal.prestigeBonus) effectPreview = `+${effectVal.prestigeBonus} prestige/rebirth`;
-      else if (effectVal.rebirthBonus) effectPreview = `+${Math.round(effectVal.rebirthBonus * 100)}% rebirth mult`;
-
-      const div = document.createElement('div');
-      div.className = cls;
-      div.innerHTML = `
-        <div class="skill-name">
-          <span>${sk.icon} ${sk.name}</span>
-          <span class="skill-lvl-badge">${lvl}/${sk.maxLvl}</span>
-        </div>
-        <div class="skill-desc">${sk.desc}</div>
-        <div class="skill-effect">${maxed ? '✓ MAXED' : `Next: ${effectPreview}`}</div>
-        ${!maxed && reqMet ? `<div class="skill-cost">${cost} Skill Point${cost !== 1 ? 's' : ''}</div>` : ''}
-        ${!reqMet ? `<div style="font-size:10px;color:#666;margin-top:2px">Requires previous skill</div>` : ''}
-      `;
-
-      if (!maxed && reqMet && canAfford) {
-        div.addEventListener('click', () => buySkill(sk));
-      }
-      branchDiv.appendChild(div);
-    }
-    container.appendChild(branchDiv);
-  }
-}
-
 function renderRebirthTitles() {
   const el = document.getElementById('rebirth-titles-list');
   if (!el) return;
-  // Show all fixed titles + any extra "transcendent" tiers earned
-  const extraRebirths = Math.max(0, state.rebirths - REBIRTHS.length);
-  const allTitles = [
-    ...REBIRTHS.map((r, i) => ({ label: r.label, need: r.need, done: state.rebirths > i })),
-    ...Array.from({ length: extraRebirths }, (_, i) => ({
-      label: `TRANSCENDENT ${i + 1}`,
-      need: REBIRTHS[REBIRTHS.length-1].need * Math.pow(50, i+1),
-      done: true
-    }))
-  ];
-  el.innerHTML = allTitles.map(r =>
-    `<div style="opacity:${r.done ? 1 : 0.3};color:${r.done ? '#d8b4fe' : 'var(--dim)'};font-size:11px;margin-top:2px;">
-      ${r.done ? '✦' : '○'} ${r.label} (${fmtNum(r.need)})
+  el.innerHTML = REBIRTHS.map((r, i) =>
+    `<div style="opacity:${state.rebirths > i ? 1 : 0.3};color:${state.rebirths > i ? '#d8b4fe' : 'var(--dim)'};font-size:11px;margin-top:2px;">
+      ${state.rebirths > i ? '✦' : '○'} ${r.label} (${fmtNum(r.need)})
     </div>`
   ).join('');
 }
@@ -1861,7 +1485,8 @@ function renderStats() {
   const canRebirth = state.totalEarned >= need;
   const rebirthBtn = document.getElementById('rebirth-btn');
   rebirthBtn.disabled = !canRebirth;
-  const rebirthLabel = state.rebirths < REBIRTHS.length ? REBIRTHS[state.rebirths].label : `TRANSCENDENT ${state.rebirths - REBIRTHS.length + 1}`;
+  const rebirthIdx = Math.min(state.rebirths, REBIRTHS.length - 1);
+  const rebirthLabel = REBIRTHS[rebirthIdx] ? REBIRTHS[rebirthIdx].label : 'TRANSCENDENT';
   document.getElementById('rebirth-cost-info').innerHTML =
     `Next title: <b style="color:#d8b4fe">${rebirthLabel}</b><br>Requires <span class="rebirth-bonus">${fmtNum(need)}</span> total ammo earned<br>You have: <span style="color:${canRebirth?'var(--green)':'var(--accent)'}">${fmtNum(state.totalEarned)}</span>`;
   document.getElementById('rebirth-bonus-display').innerHTML =
@@ -1945,20 +1570,6 @@ function buyPrestige(p) {
   showBanner(`💎 PRESTIGE: ${p.name}!`, 'achieve');
 }
 
-function buySkill(sk) {
-  const lvl = state.skills[sk.id] || 0;
-  if (lvl >= sk.maxLvl) return;
-  const reqMet = !sk.requires || (state.skills[sk.requires] || 0) > 0;
-  if (!reqMet) return;
-  const cost = skillCost(sk);
-  if ((state.skillPoints || 0) < cost) return;
-  state.skillPoints -= cost;
-  state.skills[sk.id] = lvl + 1;
-  renderSkillTree();
-  renderStats();
-  showBanner(`🌿 SKILL UP: ${sk.icon} ${sk.name} Lv${lvl + 1}!`, 'skill-banner');
-}
-
 let autoBuyOn = false;
 function toggleAutoBuy() {
   autoBuyOn = !autoBuyOn;
@@ -2021,14 +1632,9 @@ function doRebirth() {
   const need = getRebirthRequirement();
   if (state.totalEarned < need) return;
   const newRebirth = state.rebirths + 1;
-  const sk = getSkillEffects();
-  const rebirthBonusPct = sk.rebirthBonus || 0;
-  const newMult = Math.pow(1.5 * (1 + rebirthBonusPct), newRebirth);
-  const basePts = Math.floor(Math.log10(state.totalEarned));
-  const pts = basePts + (sk.prestigeBonus || 0);
-  const skillPtsGained = 1; // Always 1 skill point per rebirth
-
-  if (!confirm(`REBIRTH ${newRebirth}?\n\nThis resets all ammo, weapons, and upgrades.\n\nYou gain:\n• Permanent ×${newMult.toFixed(2)} production multiplier\n• ${pts} Prestige Point(s)\n• ${skillPtsGained} Skill Point\n\nContinue?`)) return;
+  const newMult = Math.pow(1.5, newRebirth);
+  const pts = Math.floor(Math.log10(state.totalEarned));
+  if (!confirm(`REBIRTH ${newRebirth}?\n\nThis resets all ammo, weapons, and upgrades.\n\nYou gain:\n• Permanent ×${newMult.toFixed(2)} production multiplier\n• ${pts} Prestige Point(s)\n\nContinue?`)) return;
 
   state.ammo = 0;
   state.totalEarned = 0;
@@ -2038,18 +1644,14 @@ function doRebirth() {
   state.rebirthMult = newMult;
   state.prestigePoints = (state.prestigePoints || 0) + pts;
   state.totalPrestigePoints = (state.totalPrestigePoints || 0) + pts;
-  state.skillPoints = (state.skillPoints || 0) + skillPtsGained;
-  state.totalSkillPoints = (state.totalSkillPoints || 0) + skillPtsGained;
 
   renderUpgrades();
   renderWeapons();
   renderPrestige();
-  renderSkillTree();
   renderStats();
   renderRebirthTitles();
   doRebirthEffect();
-  const rebirthTitle = newRebirth <= REBIRTHS.length ? (REBIRTHS[newRebirth-1]?.label || 'TRANSCENDENT') : `TRANSCENDENT ${newRebirth - REBIRTHS.length}`;
-  showBanner(`✦ REBIRTH ${newRebirth}: ${rebirthTitle} ✦`, 'rebirth-banner');
+  showBanner(`✦ REBIRTH ${newRebirth}: ${REBIRTHS[Math.min(newRebirth-1, REBIRTHS.length-1)]?.label || 'TRANSCENDENT'} ✦`, 'rebirth-banner');
 }
 
 // ============================================================
@@ -2172,25 +1774,23 @@ function flushBanner() {
 
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach((b, i) => {
-    const names = ['upgrades', 'achieve', 'stats', 'leaderboard'];
+    const names = ['upgrades', 'achieve', 'stats'];
     b.className = 'tab-btn' + (names[i] === name ? ' active' : '');
   });
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   if (name === 'achieve') renderAchievements();
   if (name === 'stats') renderStats();
-  if (name === 'leaderboard') lbLoad();
 }
 
 function switchRTab(name) {
   document.querySelectorAll('.rtab-btn').forEach((b, i) => {
-    const names = ['arsenal', 'prestige', 'skills', 'rebirth'];
+    const names = ['arsenal', 'prestige', 'rebirth'];
     b.className = 'rtab-btn' + (names[i] === name ? ' active' : '');
   });
   document.querySelectorAll('.rtab-content').forEach(el => el.classList.remove('active'));
   document.getElementById('rtab-' + name).classList.add('active');
   if (name === 'prestige') renderPrestige();
-  if (name === 'skills') renderSkillTree();
   if (name === 'rebirth') renderRebirthTitles();
 }
 
@@ -2200,32 +1800,16 @@ function switchRTab(name) {
 
 function save() {
   state.lastSave = Date.now();
-  try { localStorage.setItem('arsenalclicker_v3', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('arsenalclicker_v2', JSON.stringify(state)); } catch(e) {}
 }
 
 function load() {
   try {
-    // Try v3 save first, then fall back to v2 (old save format)
-    const raw = localStorage.getItem('arsenalclicker_v3') || localStorage.getItem('arsenalclicker_v2');
-    if (raw) {
-      const loaded = JSON.parse(raw);
+    const s = localStorage.getItem('arsenalclicker_v2');
+    if (s) {
+      const loaded = JSON.parse(s);
       state = { ...state, ...loaded };
-      if (!state.skills) state.skills = {};
       if (state.autoBuy) { autoBuyOn = true; }
-
-      // BACKFILL: every rebirth should have granted 1 skill point.
-      // totalSkillPoints tracks lifetime earned. If it's less than rebirths,
-      // the player existed before skill points were added — grant the difference.
-      const expected = state.rebirths;   // 1 SP per rebirth
-      const alreadyHave = state.totalSkillPoints || 0;
-      if (expected > alreadyHave) {
-        const missing = expected - alreadyHave;
-        state.skillPoints = (state.skillPoints || 0) + missing;
-        state.totalSkillPoints = expected;
-      }
-      // Ensure these are never undefined
-      if (!state.skillPoints) state.skillPoints = 0;
-      if (!state.totalSkillPoints) state.totalSkillPoints = 0;
     }
   } catch(e) {}
 }
@@ -2249,9 +1833,7 @@ function handleOfflineProgress() {
   const maxAway = 8 * 3600;
   const effectiveAway = Math.min(away, maxAway);
   const aps = getAPS();
-  const sk = getSkillEffects();
-  const offlineMult = 0.5 + (sk.offlineBonus || 0);
-  const offlineAPS = aps * offlineMult;
+  const offlineAPS = aps * 0.5;
   const gained = offlineAPS * effectiveAway;
   if (gained > 1) {
     state.ammo += gained;
@@ -2383,7 +1965,6 @@ renderUpgrades();
 renderWeapons();
 renderAchievements();
 renderPrestige();
-renderSkillTree();
 renderRebirthTitles();
 renderStats();
 
@@ -2424,92 +2005,12 @@ if (window.innerWidth <= 700) {
 
 window.addEventListener('resize', function() {
   if (window.innerWidth > 700) {
+    // Remove mobile classes on desktop so grid shows all 3
     document.getElementById('left-panel').classList.remove('col-active');
     document.getElementById('clicker-area').classList.remove('col-active');
     document.getElementById('right-panel').classList.remove('col-active');
   }
 });
-
-// ============================================================
-// LEADERBOARD  (shared persistent storage)
-// ============================================================
-
-const LB_KEY = 'leaderboard_v1';
-
-async function lbLoad() {
-  const el = document.getElementById('lb-list');
-  if (!el) return;
-  el.innerHTML = '<div style="color:var(--dim);text-align:center;padding:12px;">Loading...</div>';
-  try {
-    const result = await window.storage.get(LB_KEY, true);
-    const entries = result ? JSON.parse(result.value) : [];
-    lbRender(entries);
-  } catch(e) {
-    lbRender([]);
-  }
-}
-
-async function lbSubmit() {
-  const input = document.getElementById('lb-name-input');
-  const name = (input.value || '').trim().slice(0, 16);
-  if (!name) { input.focus(); return; }
-
-  const score = Math.floor(state.totalEarned);
-  const rebirths = state.rebirths;
-  const aps = Math.floor(getAPS());
-
-  try {
-    const result = await window.storage.get(LB_KEY, true);
-    let entries = result ? JSON.parse(result.value) : [];
-
-    // Remove old entry for same name, add new one
-    entries = entries.filter(e => e.name.toLowerCase() !== name.toLowerCase());
-    entries.push({ name, score, rebirths, aps, ts: Date.now() });
-
-    // Keep top 50 by score
-    entries.sort((a, b) => b.score - a.score);
-    entries = entries.slice(0, 50);
-
-    await window.storage.set(LB_KEY, JSON.stringify(entries), true);
-    lbRender(entries);
-    input.value = '';
-    showBanner('🏆 SCORE POSTED!', 'achieve');
-  } catch(e) {
-    showBanner('⚠ Could not post score', 'achieve');
-  }
-}
-
-function lbRender(entries) {
-  const el = document.getElementById('lb-list');
-  if (!el) return;
-  if (!entries.length) {
-    el.innerHTML = '<div style="color:var(--dim);text-align:center;padding:12px;">No scores yet — be first!</div>';
-    return;
-  }
-  const medals = ['🥇','🥈','🥉'];
-  el.innerHTML = entries.map((e, i) => {
-    const rank = i + 1;
-    const medal = medals[i] || `<span style="color:var(--dim);font-size:11px;">#${rank}</span>`;
-    const isMe = e.name === (document.getElementById('lb-name-input')?.value?.trim() || '__');
-    return `<div style="
-      display:flex;align-items:center;gap:8px;
-      padding:6px 8px;border-radius:4px;
-      background:${isMe ? 'rgba(255,69,0,0.12)' : (i % 2 === 0 ? '#0f0f1c' : 'transparent')};
-      border-left:2px solid ${i===0?'var(--gold)':i===1?'#aaa':i===2?'#cd7f32':'var(--border)'};
-    ">
-      <span style="width:24px;text-align:center;font-size:15px;">${medal}</span>
-      <span style="flex:1;font-weight:600;color:${isMe?'var(--accent)':'var(--text)'};">${e.name}</span>
-      <span style="color:var(--accent2);font-size:12px;">${fmtNum(e.score)}</span>
-      <span style="color:var(--dim);font-size:10px;margin-left:4px;">♻${e.rebirths||0}</span>
-    </div>`;
-  }).join('');
-}
-
-// Auto-submit score every 5 min if name is set
-setInterval(() => {
-  const name = document.getElementById('lb-name-input')?.value?.trim();
-  if (name) lbSubmit();
-}, 5 * 60 * 1000);
 
 </script>
 </body>
